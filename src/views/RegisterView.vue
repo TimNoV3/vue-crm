@@ -103,7 +103,7 @@ export default {
     agree: { checked: (v) => v },
   }),
   methods: {
-    submitHandler() {
+    async submitHandler() {
       this.v$.$validate();
       if (this.v$.$error) {
         this.v$.$touch();
@@ -114,8 +114,12 @@ export default {
         password: this.password,
         name: this.name,
       };
-      console.log(formData);
-      this.$router.push('/login');
+      try {
+        await this.$store.dispatch('register', formData);
+        this.$router.push('/');
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

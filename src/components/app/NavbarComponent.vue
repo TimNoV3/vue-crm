@@ -11,7 +11,7 @@
       <ul class="right hide-on-small-and-down">
         <li>
           <a class="dropdown-trigger black-text" href="#" data-target="dropdown" ref="dropdown">
-            USER NAME
+            {{ userName }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -43,8 +43,8 @@ export default {
     dropdown: null,
   }),
   methods: {
-    logout() {
-      console.log('Logout');
+    async logout() {
+      await this.$store.dispatch('logout');
       this.$router.push('/login?message=logout');
     },
   },
@@ -63,6 +63,9 @@ export default {
     }
   },
   computed: {
+    userName() {
+      return this.$store.getters.info.name;
+    },
     filterDate() {
       const options = {
         day: '2-digit',
