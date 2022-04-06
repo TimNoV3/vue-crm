@@ -19,5 +19,6 @@ module.exports = {
       },
     ],
     'no-undef': 'off',
+    'no-useless-catch': 'off',
   },
 };

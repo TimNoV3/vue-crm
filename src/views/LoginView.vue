@@ -83,7 +83,7 @@ export default {
     }
   },
   methods: {
-    submitHandler() {
+    async submitHandler() {
       this.v$.$validate();
       if (this.v$.$error) {
         this.v$.$touch();
@@ -93,8 +93,12 @@ export default {
         email: this.email,
         password: this.password,
       };
-      console.log(formData);
-      this.$router.push('/');
+      try {
+        await this.$store.dispatch('login', formData);
+        this.$router.push('/');
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
