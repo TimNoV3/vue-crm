@@ -3,6 +3,7 @@ import messagePlugin from '@/utils/message.plugin';
 import LoaderComponent from '@/components/app/LoaderComponent.vue';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import tooltipDirective from '@/directives/tooltip.directive';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
@@ -29,6 +30,7 @@ onAuthStateChanged(auth, () => {
   if (!app) {
     app = createApp(App).use(store).use(router).use(messagePlugin)
       .component('Loader', LoaderComponent)
+      .directive('tooltip', tooltipDirective)
       .mount('#app');
   }
 });

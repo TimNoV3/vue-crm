@@ -67,7 +67,7 @@ import { useVuelidate } from '@vuelidate/core';
 import messages from '@/utils/messages';
 
 export default {
-  name: 'loginPage',
+  name: 'loginView',
   data: () => ({
     v$: useVuelidate(),
     email: '',

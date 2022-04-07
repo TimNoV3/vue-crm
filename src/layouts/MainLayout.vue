@@ -1,18 +1,22 @@
 <template>
   <div>
-    <Loader v-if="loading"/>
+    <Loader v-if="loading" />
     <div class="app-main-layout" v-else>
-      <Navbar @openBar="isOpen = !isOpen"/>
-      <Sidebar v-model="isOpen"/>
+      <Navbar @openBar="isOpen = !isOpen" />
+      <Sidebar v-model="isOpen" />
 
-      <main class="app-content" :class="{full: !isOpen}">
+      <main class="app-content" :class="{ full: !isOpen }">
         <div class="app-page">
           <router-view />
         </div>
       </main>
 
       <div class="fixed-action-btn">
-        <router-link class="btn-floating btn-large blue" to="/record">
+        <router-link
+          class="btn-floating btn-large blue"
+          to="/record"
+          v-tooltip="'Создать новую запись'"
+        >
           <i class="large material-icons">add</i>
         </router-link>
       </div>
@@ -23,6 +27,7 @@
 <script>
 import Navbar from '@/components/app/NavbarComponent.vue';
 import Sidebar from '@/components/app/SidebarComponent.vue';
+import messages from '@/utils/messages';
 
 export default {
   name: 'main-layout',
@@ -39,6 +44,16 @@ export default {
   components: {
     Sidebar,
     Navbar,
+  },
+  computed: {
+    error() {
+      return this.$store.getters.error;
+    },
+  },
+  watch: {
+    error(fbError) {
+      this.$error(messages[fbError.code] || 'Something went wrong!');
+    },
   },
 };
 </script>

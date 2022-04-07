@@ -5,10 +5,9 @@ import { getDatabase, ref, set } from 'firebase/database';
 
 export default {
   actions: {
-    async login({ dispatch, commit }, { email, password }) {
+    async login({ commit }, { email, password }) {
       try {
         const auth = getAuth();
-        console.log(dispatch, commit);
         await signInWithEmailAndPassword(auth, email, password);
       } catch (error) {
         commit('setError', error);
@@ -20,7 +19,6 @@ export default {
         const auth = getAuth();
         const db = getDatabase();
 
-        console.log(dispatch, commit);
         await createUserWithEmailAndPassword(auth, email, password);
         const uid = await dispatch('getUid');
 

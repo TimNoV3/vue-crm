@@ -88,7 +88,7 @@ import { email, required, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 
 export default {
-  name: 'registerPage',
+  name: 'registerView',
   data: () => ({
     v$: useVuelidate(),
     email: '',
