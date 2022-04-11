@@ -65,6 +65,7 @@
 import { email, required, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import messages from '@/utils/messages';
+import { useMeta } from 'vue-meta';
 
 export default {
   name: 'loginView',
@@ -78,6 +79,7 @@ export default {
     password: { required, minLength: minLength(6) },
   }),
   mounted() {
+    useMeta({ title: 'Login' });
     if (messages[this.$route.query.message]) {
       this.$message(messages[this.$route.query.message]);
     }

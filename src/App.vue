@@ -1,4 +1,9 @@
 <template>
+  <metainfo>
+    <template v-slot:title="{ content }">{{
+      content ? `${content} | CRM ` : `CRM`
+    }}</template>
+  </metainfo>
   <component :is="layout">
     <router-view />
   </component>
@@ -15,12 +20,13 @@ export default {
     },
   },
   components: {
-    EmptyLayout, MainLayout,
+    EmptyLayout,
+    MainLayout,
   },
 };
 </script>
 
 <style lang="scss">
-@import "~materialize-css/dist/css/materialize.min.css";
-@import "assets/index.css";
+@import '~materialize-css/dist/css/materialize.min.css';
+@import 'assets/index.css';
 </style>

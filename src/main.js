@@ -4,6 +4,9 @@ import LoaderComponent from '@/components/app/LoaderComponent.vue';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import tooltipDirective from '@/directives/tooltip.directive';
+import Paginate from 'vuejs-paginate-next';
+import localizeFilter from '@/filters/locale.filter';
+import { createMetaManager } from 'vue-meta';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
@@ -29,8 +32,14 @@ const auth = getAuth();
 onAuthStateChanged(auth, () => {
   if (!app) {
     app = createApp(App).use(store).use(router).use(messagePlugin)
+      .use(createMetaManager())
       .component('Loader', LoaderComponent)
-      .directive('tooltip', tooltipDirective)
-      .mount('#app');
+      .component('Paginate', Paginate)
+      .directive('tooltip', tooltipDirective);
+
+    app.config.globalProperties.$filters = {
+      localizeFilter,
+    };
+    app.mount('#app');
   }
 });

@@ -31,6 +31,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { useMeta } from 'vue-meta';
 
 export default {
   name: 'PlanningView',
@@ -51,6 +52,7 @@ export default {
     },
   },
   async mounted() {
+    useMeta({ title: 'Planning' });
     const records = await this.$store.dispatch('fetchRecords');
     const categories = await this.$store.dispatch('fetchCategories');
 

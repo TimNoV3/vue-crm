@@ -37,5 +37,28 @@ export default {
         throw error;
       }
     },
+    async fetchRecordByID({ dispatch, commit }, id) {
+      try {
+        const uid = await dispatch('getUid');
+        const db = getDatabase();
+
+        const record = await new Promise(
+          (resolve) => {
+            onValue(
+              ref(db, `/users/${uid}/records/${id}`),
+              (snapshot) => resolve(snapshot.val() || {}),
+            );
+          },
+        );
+
+        return {
+          ...record,
+          id,
+        };
+      } catch (error) {
+        commit('setError', error);
+        throw error;
+      }
+    },
   },
 };
