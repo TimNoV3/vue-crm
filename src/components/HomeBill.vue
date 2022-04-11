@@ -29,7 +29,8 @@ export default {
   },
   methods: {
     getCurrency(currency) {
-      return Math.floor(this.base * this.rates[currency]);
+      const rate = this.rates[currency] ? this.rates[currency] : 1;
+      return Math.floor(this.base * rate);
     },
     filterCurrency(value, currency) {
       const options = {

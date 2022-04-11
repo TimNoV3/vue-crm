@@ -22,7 +22,7 @@ export default createStore({
   actions: {
     async fetchCurrency() {
       const key = process.env.VUE_APP_FIXER;
-      const res = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbold=USD,EUR,RUB`);
+      const res = await fetch(`https://openexchangerates.org/api/latest.json?app_id=${key}&base=USD&symbols=RUB,EUR`);
       const result = await res.json();
       return result;
     },

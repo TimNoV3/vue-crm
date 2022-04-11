@@ -17,8 +17,8 @@
               <tbody>
                 <tr v-for="cur in currencies" :key="cur">
                   <td>{{ cur }}</td>
-                  <td>{{ rates[cur].toFixed(2) }}</td>
-                  <td>{{date}}</td>
+                  <td>{{ rates[cur] ? rates[cur].toFixed(2) : 1}}</td>
+                  <td>{{filterDate(date)}}</td>
                 </tr>
               </tbody>
             </table>
@@ -33,5 +33,21 @@ export default {
   data: () => ({
     currencies: ['RUB', 'USD', 'EUR'],
   }),
+  methods: {
+    filterDate(date) {
+      const options = {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      };
+
+      return new Intl.DateTimeFormat(this.$store.getters.info.locale, options).format(
+        new Date(date),
+      );
+    },
+  },
 };
 </script>

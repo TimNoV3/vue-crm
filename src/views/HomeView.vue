@@ -14,7 +14,7 @@
       />
       <HomeCurrencyVue
         :rates="currency.rates"
-        :date="currency.date"
+        :date="currency.timestamp"
       />
     </div>
   </div>
