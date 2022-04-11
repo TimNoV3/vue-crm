@@ -72,6 +72,7 @@
 import { required, minValue } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import { mapGetters } from 'vuex';
+import { useMeta } from 'vue-meta';
 
 export default {
   name: 'RecordView',
@@ -90,6 +91,7 @@ export default {
     description: { required },
   }),
   async mounted() {
+    useMeta({ title: 'Record' });
     this.categories = await this.$store.dispatch('fetchCategories');
     this.loading = false;
 

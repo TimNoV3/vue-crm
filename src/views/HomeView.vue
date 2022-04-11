@@ -23,6 +23,7 @@
 <script>
 import HomeBillVue from '@/components/HomeBill.vue';
 import HomeCurrencyVue from '@/components/HomeCurrency.vue';
+import { useMeta } from 'vue-meta';
 
 export default {
   name: 'HomeView',
@@ -31,6 +32,7 @@ export default {
     currency: null,
   }),
   async mounted() {
+    useMeta({ title: 'Home' });
     this.currency = await this.$store.dispatch('fetchCurrency');
     this.loading = false;
   },

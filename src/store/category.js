@@ -27,6 +27,29 @@ export default {
         throw error;
       }
     },
+    async fetchCategoryByID({ commit, dispatch }, id) {
+      try {
+        const uid = await dispatch('getUid');
+        const db = getDatabase();
+
+        const category = await new Promise(
+          (resolve) => {
+            onValue(
+              ref(db, `/users/${uid}/categories/${id}`),
+              (snapshot) => resolve(snapshot.val() || {}),
+            );
+          },
+        );
+
+        return {
+          ...category,
+          id,
+        };
+      } catch (error) {
+        commit('setError', error);
+        throw error;
+      }
+    },
     async updateCategory({ commit, dispatch }, { title, limit, id }) {
       try {
         const uid = await dispatch('getUid');

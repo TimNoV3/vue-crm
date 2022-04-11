@@ -75,8 +75,7 @@ export default {
         minute: '2-digit',
         second: '2-digit',
       };
-
-      return new Intl.DateTimeFormat('ru-Ru', options).format(this.date);
+      return new Intl.DateTimeFormat(this.$store.getters.info.locale, options).format(this.date);
     },
   },
 };

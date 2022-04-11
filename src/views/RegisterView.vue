@@ -86,6 +86,7 @@
 <script>
 import { email, required, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
+import { useMeta } from 'vue-meta';
 
 export default {
   name: 'registerView',
@@ -102,6 +103,9 @@ export default {
     name: { required },
     agree: { checked: (v) => v },
   }),
+  mounted() {
+    useMeta({ title: 'Register' });
+  },
   methods: {
     async submitHandler() {
       this.v$.$validate();

@@ -22,6 +22,7 @@
 <script>
 import CategoryCreate from '@/components/CategoryCreate.vue';
 import CategoryEdit from '@/components/CategoryEdit.vue';
+import { useMeta } from 'vue-meta';
 
 export default {
   name: 'CategoriesView',
@@ -46,6 +47,7 @@ export default {
     CategoryEdit,
   },
   async mounted() {
+    useMeta({ title: 'Categories' });
     this.categories = await this.$store.dispatch('fetchCategories');
     this.loading = false;
   },
